@@ -3,6 +3,9 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+let noteListItems = [];
+// activeNote is used to keep track of the note in the textarea
+let activeNote = {};
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -11,6 +14,11 @@ if (window.location.pathname === '/notes') {
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
 }
+
+const fs = require('fs');
+//requ ---------------
+
+
 
 // Show an element
 const show = (elem) => {
@@ -22,9 +30,8 @@ const hide = (elem) => {
   elem.style.display = 'none';
 };
 
-// activeNote is used to keep track of the note in the textarea
-let activeNote = {};
 
+// fetch  -------------- 
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -49,6 +56,10 @@ const deleteNote = (id) =>
       'Content-Type': 'application/json',
     },
   });
+
+
+// fetch  -------------- 
+
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -117,13 +128,13 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of note titles
+////////////////////////////////////////////////////////
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
 
-  let noteListItems = [];
 
   // Returns HTML element with or without a delete button
   const createLi = (text, delBtn = true) => {
@@ -169,6 +180,9 @@ const renderNoteList = async (notes) => {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
+// Render the list of note titles
+////////////////////////////////////////////////////////
+
 
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
