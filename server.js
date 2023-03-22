@@ -26,6 +26,9 @@ app.get('/notes', (req, res) =>
 );
 
 //add
+const writing = fs.readFile('db/db.json','utf8')
+console.log(writing)
+
 app.post('/api/notes', (req, res) =>
 res.json(
 
