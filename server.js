@@ -7,6 +7,7 @@
 
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 
 
 const app = express();
@@ -14,6 +15,7 @@ const PORT = 3001;
 
 app.use(express.static('public'));
 
+//take you to first page
 app.get('/', (req, res) =>  
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
@@ -24,14 +26,20 @@ app.get('/notes', (req, res) =>
 );
 
 //add
+app.post('/api/notes', (req, res) =>
+res.json(
+
+));
+
 app.get('/api/notes', (req, res) =>
-res.json(termData));
-
-
+console.log("api/notes")
+)
 
 //delete
 app.get(`/api/notes/:id`, (req, res) =>
-res.json(termData));
+res.json(
+
+));
 
 
 app.listen(PORT, () =>
