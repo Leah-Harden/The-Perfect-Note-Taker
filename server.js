@@ -30,7 +30,7 @@ res.json(termData));
 
 
 //delete
-app.get(`/api/notes/${id}`, (req, res) =>
+app.get(`/api/notes/:id`, (req, res) =>
 res.json(termData));
 
 
