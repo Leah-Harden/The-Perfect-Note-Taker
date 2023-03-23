@@ -35,11 +35,12 @@ app.get('/api/notes', async(req, res) => {
 }
 );
 
+1
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
-    newNote.id = Math.floor(Math.random() * 101)// as a random id
+    newNote.id = Math.floor(Math.random() * 101)// adds a random id
 
-        fs.readFile('./db/db.json', 'utf8'(err,data) => {
+        fs.readFile('./db/db.json','utf8',(err,data) => {
             if(err) throw err;
             const notes = JSON.parse(newNote);
             notes.push(newNote)
@@ -48,9 +49,10 @@ app.post('/api/notes', (req, res) => {
                 if (err) throw err; 
                 res.json(newNote)
         })
+    }
     )} 
-})
-S
+)
+
 
 
 //delete --------------------------------
