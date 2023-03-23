@@ -30,12 +30,14 @@ app.get('/notes', (req, res) =>
 
 
 app.get('/api/notes', async(req, res) => {
-    let data = await fs.promises.readFile('./db/db.json', 'utf8')
+    // old way
+    //let data = await fs.promises.readFile('./db/db.json', 'utf8')
+    let data = await JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
     res.json(data)
 }
 );
 
-1
+
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
     newNote.id = Math.floor(Math.random() * 101)// adds a random id
