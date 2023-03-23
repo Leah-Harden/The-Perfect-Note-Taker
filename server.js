@@ -1,6 +1,4 @@
 
-
-//create node server
 //create 5 routes 
 // just node and express
 // read as json and write the file
@@ -15,36 +13,55 @@ const PORT = 3001;
 
 app.use(express.static('public'));
 
-//take you to first page
-app.get('/', (req, res) =>  
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//take you to first page  --------------------------------
+app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
-//switch pages
-app.get('/notes', (req, res) =>  
+//switch pages  --------------------------------
+app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
-//add
-const writing = fs.readFile('db/db.json','utf8')
-console.log(writing)
+//add --------------------------------
 
-app.post('/api/notes', (req, res) =>
-res.json(
 
-));
+app.get('/api/notes', async(req, res) => {
+    let data = await fs.promises.readFile('./db/db.json', 'utf8')
+    res.json(data)
+}
+);
 
-app.get('/api/notes', (req, res) =>
-console.log("api/notes")
-)
+app.post('/api/notes', (req, res) => {
+    // Destructuring assignment for the items in req.body
+    const newNote = req.body;
+    newNote.id = Math.floor(Math.random() * 101)
+        // Convert the data to a string so we can save it
+        fs.readFile('./db/db.json', 'utf8'(err,data) => {
+            if(err) throw err;
+            const notes = JSON.parse(newNote);
+            notes.push(newNote)
+            // Appending the string to a file
+            fs.writeFile(`./db/db.json`,JSON.stringify(notes), (err) =>{
+                if (err) throw err; 
+                res.json(newNote)W
+        })
+    )} 
+})
+S
 
-//delete
+
+//delete --------------------------------
 app.get(`/api/notes/:id`, (req, res) =>
-res.json(
+    res.json(
 
-));
+    ));
 
 
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
 );
+
