@@ -36,18 +36,17 @@ app.get('/api/notes', async(req, res) => {
 );
 
 app.post('/api/notes', (req, res) => {
-    // Destructuring assignment for the items in req.body
     const newNote = req.body;
-    newNote.id = Math.floor(Math.random() * 101)
-        // Convert the data to a string so we can save it
+    newNote.id = Math.floor(Math.random() * 101)// as a random id
+
         fs.readFile('./db/db.json', 'utf8'(err,data) => {
             if(err) throw err;
             const notes = JSON.parse(newNote);
             notes.push(newNote)
-            // Appending the string to a file
+            // writes all of the notes 
             fs.writeFile(`./db/db.json`,JSON.stringify(notes), (err) =>{
                 if (err) throw err; 
-                res.json(newNote)W
+                res.json(newNote)
         })
     )} 
 })
