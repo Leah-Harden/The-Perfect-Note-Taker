@@ -6,6 +6,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const notes = require("./db/db.json")
 
 
 const app = express();
@@ -39,21 +40,19 @@ app.get('/api/notes', async(req, res) => {
 
 
 app.post('/api/notes', (req, res) => {
+    const notes = require("./db/db.json")
     const newNote = req.body;
     newNote.id = Math.floor(Math.random() * 101)// adds a random id
-
-        fs.readFile('./db/db.json','utf8',(err,data) => {
-            if(err) throw err;
-            const notes = JSON.parse(newNote);
-            notes.push(newNote)
+    notes.push(newNote)
+console.log(notes)
             // writes all of the notes 
             fs.writeFile(`./db/db.json`,JSON.stringify(notes), (err) =>{
+                
                 if (err) throw err; 
                 res.json(newNote)
         })
-    }
-    )} 
-)
+
+    })
 
 
 
