@@ -30,7 +30,7 @@ app.get('/notes', (req, res) =>
 //add --------------------------------
 
 
-app.get('/api/notes', async(req, res) => {
+app.get('/api/notes', async (req, res) => {
     // old way
     //let data = await fs.promises.readFile('./db/db.json', 'utf8')
     let data = await JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
@@ -44,15 +44,15 @@ app.post('/api/notes', (req, res) => {
     const newNote = req.body;
     newNote.id = Math.floor(Math.random() * 101)// adds a random id
     notes.push(newNote)
-console.log(notes)
-            // writes all of the notes 
-            fs.writeFile(`./db/db.json`,JSON.stringify(notes), (err) =>{
-                
-                if (err) throw err; 
-                res.json(newNote)
-        })
+    console.log(notes)
+    // writes all of the notes 
+    fs.writeFile(`./db/db.json`, JSON.stringify(notes), (err) => {
 
+        if (err) throw err;
+        res.json(newNote)
     })
+
+})
 
 
 
