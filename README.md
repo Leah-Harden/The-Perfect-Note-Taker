@@ -4,7 +4,7 @@ This is a applaction that you can add and save notes. This is done using the Exp
 
 ## Installation
 
-You need to npm i before anything works.
+You need to npm I before anything works.
 
 ## Deployment
 
